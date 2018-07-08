@@ -45,5 +45,12 @@ namespace BookStore.Controllers
             string path = "https://cdn.tproger.ru/wp-content/themes/bliss/assets/img/tp-circle2.png";
             return new ImageResult(path);
         }
+
+        public ViewResult SomeMethod()
+        {
+            //ViewData["Head"] = "Привет, мир!";
+            ViewBag.Head = "Привет, мир!";
+            return View("SomeView");
+        }
     }
 }
