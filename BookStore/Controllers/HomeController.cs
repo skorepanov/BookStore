@@ -103,5 +103,55 @@ namespace BookStore.Controllers
             return View();
         }
         #endregion RedirectResult
+
+        #region Cookie, Session
+        public string GetHttpContext()
+        {
+            string browser = HttpContext.Request.Browser.Browser;
+            string userAgent = HttpContext.Request.UserAgent;
+            string url = HttpContext.Request.RawUrl;
+            string ip = HttpContext.Request.UserHostAddress;
+            string referrer = HttpContext.Request.UrlReferrer != null
+                ? HttpContext.Request.UrlReferrer.AbsoluteUri
+                : string.Empty;
+
+            return "<p>Browser: " + browser + "</p>" +
+                "<p>User-Agent: " + userAgent + "</p>" +
+                "<p>Url запроса: " + url + "</p>" +
+                "<p>Реферер: " + referrer + "</p>" +
+                "<p>IP-адрес: " + ip + "</p>";
+        }
+
+        public string GetHttpContext2()
+        {
+            HttpContext.Response.Write("<h1>Hello World</h1>");
+
+            string userAgent = HttpContext.Request.UserAgent;
+            string url = HttpContext.Request.RawUrl;
+            string ip = HttpContext.Request.UserHostAddress;
+            string referrer = HttpContext.Request.UrlReferrer == null ? "" : HttpContext.Request.UrlReferrer.AbsoluteUri;
+            return "<p>User-Agent: " + userAgent + "</p>" +
+                "<p>Url запроса: " + url + "</p>" +
+                "<p>Реферер: " + referrer + "</p>" +
+                "<p>IP-адрес: " + ip + "</p>";
+        }
+
+        public string GetCookie()
+        {
+            HttpContext.Response.Cookies["id"].Value = "ca-4353w";
+            string id = HttpContext.Request.Cookies["id"].Value;
+
+            return id;
+        }
+
+        public string GetSession()
+        {
+            Session["name"] = "Tom";
+            var name = Session["name"];
+            Session["name"] = null;
+
+            return name.ToString();
+        }
+        #endregion Cookie, Session
     }
 }
