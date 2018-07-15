@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using BookStore.Models;
@@ -39,6 +41,15 @@ namespace BookStore.Controllers
             db.SaveChanges();
             return $"Спасибо, {purchase.Person}, за покупку!";
         }
+
+        #region async
+        public async Task<ActionResult> BookListAsync()
+        {
+            IEnumerable<Book> books = await db.Books.ToListAsync();
+            ViewBag.Books = books;
+            return View("Index");
+        }
+        #endregion async
 
         #region ActionResults
         public ActionResult GetHtml()
