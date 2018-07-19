@@ -5,6 +5,7 @@
     <title>@ViewBag.Title</title>
     <link href=@Url.Content("~/Content/Site.css") rel="stylesheet" type="text/css" />
 </head>
+
 <body>
     <nav>
         <ul class="menu">
@@ -12,5 +13,11 @@
         </ul>
     </nav>
     @RenderBody()
+    <footer>
+        @if (IsSectionDefined("Footer"))
+        {
+            @RenderSection("Footer")
+        }
+    </footer>
 </body>
 </html>
