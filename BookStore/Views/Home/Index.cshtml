@@ -1,4 +1,6 @@
-﻿@{
+﻿@using BookStore.Models
+@model IEnumerable<Book>
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div>
@@ -9,7 +11,7 @@
             <td><p>Автор</p></td>
             <td><p>Цена</p></td>
         </tr>
-        @foreach (var b in ViewBag.Books)
+        @foreach (var b in Model)
         {
             <tr>
                 <td><p>@b.Name</p></td>

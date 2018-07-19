@@ -16,9 +16,9 @@ namespace BookStore.Controllers
 
         public ActionResult Index()
         {
-            IEnumerable<Book> books = db.Books;
-            ViewBag.Books = books;
-            return View();
+            //IEnumerable<Book> books = db.Books;
+            //ViewBag.Books = books;
+            return View(db.Books);
         }
 
         [HttpGet]
