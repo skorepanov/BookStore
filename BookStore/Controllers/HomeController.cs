@@ -164,5 +164,13 @@ namespace BookStore.Controllers
             return name.ToString();
         }
         #endregion Cookie, Session
+
+        #region Partial view
+        public ActionResult Partial()
+        {
+            ViewBag.Message = "Это частичное представление";
+            return PartialView();
+        }
+        #endregion Partial view
     }
 }
