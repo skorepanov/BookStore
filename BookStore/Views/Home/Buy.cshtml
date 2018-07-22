@@ -4,20 +4,57 @@
 
 <div>
     <h3>Форма оформления покупки</h3>
-    <form action="" method="post">
-        <input type="hidden" name="BookId" value="@ViewBag.BookId" />
+    @using (Html.BeginForm("Buy", "Home", FormMethod.Post))
+    {
+        @Html.Hidden("BookId", ViewBag.BookId as string)
         <table>
             <tr>
                 <td><p>Введите своё имя</p></td>
-                <td><input type="text" name="Person" /></td>
+                <td>@Html.TextBox("Person", "")</td>
             </tr>
             <tr>
                 <td><p>Введите адрес</p></td>
-                <td><input type="text" name="Address" /></td>
+                <td>@Html.TextBox("Address", "")</td>
             </tr>
             <tr>
                 <td><input type="submit" value="Отправить" /></td>
             </tr>
         </table>
-    </form>
+
+        @Html.TextArea("text", "Привет<br />мир", 5, 50, null)
+        <br />
+
+        @Html.Password("UserPassword", "pass")
+        <br />
+
+        @Html.RadioButton("color", "red")
+        <span>Красный</span><br />
+        @Html.RadioButton("color", "blue")
+        <span>Синий</span><br />
+        @Html.RadioButton("color", "green", true)
+        <span>Зеленый</span><br />
+        <br />
+
+        @Html.CheckBox("Enable", false)
+        <br />
+
+        @Html.Label("Name")
+        <br />
+
+        @Html.DropDownList("countries", new SelectList(new string[] { "Russia", "USA", "Canada", "France" }), "Countries")
+        <br />
+    }
+
+    @using (Html.BeginForm("Country", "Home", FormMethod.Post))
+    {
+        @Html.ListBox("countries", new MultiSelectList(new string[] { "Россия", "США", "Китай", "Индия" }))
+        <p><input type="submit" value="Отправить" /></p>
+    }
+
+    @using (Html.BeginForm("MyAciton", "Home", FormMethod.Post))
+    {
+        <input type="text" name="product" /><br />
+        <button name="action" value="add">Добавить</button>
+        <button name="action" value="delete">Удалить</button>
+    }
 </div>

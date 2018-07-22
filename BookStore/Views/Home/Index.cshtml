@@ -24,6 +24,8 @@
     </table>
 </div>
 
+@Html.DropDownList("Author", ViewBag.BooksSelectList as SelectList)
+
 @Html.Partial("Partial", new string[] { "Russia", "USA", "Canada", "France" })
 
 <h3>Города</h3>

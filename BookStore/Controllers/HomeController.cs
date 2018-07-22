@@ -18,6 +18,7 @@ namespace BookStore.Controllers
         {
             //IEnumerable<Book> books = db.Books;
             //ViewBag.Books = books;
+            ViewBag.BooksSelectList = new SelectList(db.Books, "Author", "Name");
             return View(db.Books);
         }
 
@@ -40,6 +41,33 @@ namespace BookStore.Controllers
             db.Purchases.Add(purchase);
             db.SaveChanges();
             return $"Спасибо, {purchase.Person}, за покупку!";
+        }
+
+        [HttpPost]
+        public string Country(string[] countries)
+        {
+            string result = "";
+            foreach (string c in countries)
+            {
+                result += c;
+                result += ";";
+            }
+            return "Вы выбрали: " + result;
+        }
+
+        [HttpPost]
+        public ActionResult MyAction(string product, string action)
+        {
+            if (action == "add")
+            {
+
+            }
+            else if (action == "delete")
+            {
+
+            }
+
+            return null;
         }
 
         #region async
