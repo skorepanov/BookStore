@@ -1,4 +1,5 @@
 ﻿@using BookStore.Models
+@using BookStore.Helpers
 @model IEnumerable<Book>
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -24,6 +25,14 @@
 </div>
 
 @Html.Partial("Partial", new string[] { "Russia", "USA", "Canada", "France" })
+
+<h3>Города</h3>
+@MyHelpers.HtmlList(new string[] { "Лондон", "Париж", "Москва" })
+<br />
+<h3>Страны</h3>
+@ListHelper.CreateList(Html, new string[] { "Великобритания", "Франция", "Россия" }, new { @class="btn", id="countriesList" })
+
+@Html.Image("/Content/cat.jpg", "Спящий котэ")
 
 @section Footer {
     Все права защищены. Syte Corp. 2018
