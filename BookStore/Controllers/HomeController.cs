@@ -23,6 +23,32 @@ namespace BookStore.Controllers
         }
 
         [HttpGet]
+        public ActionResult EditBook(int? id)
+        {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+
+            Book book = db.Books.Find(id);
+
+            if (book != null)
+            {
+                return View(book);
+            }
+
+            return HttpNotFound();
+        }
+
+        [HttpPost]
+        public ActionResult EditBook(Book book)
+        {
+            db.Entry(book).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
         public ActionResult Buy(int id)
         {
             if (id > 3)
