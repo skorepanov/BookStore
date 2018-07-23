@@ -207,6 +207,7 @@
     <Content Include="Views\Home\Buy.cshtml" />
     <Content Include="Views\Home\SomeView.cshtml" />
     <Content Include="Views\Home\Partial.cshtml" />
+    <Content Include="Views\Home\Book.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\BookShop\" />

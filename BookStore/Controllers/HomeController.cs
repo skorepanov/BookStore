@@ -17,6 +17,11 @@ namespace BookStore.Controllers
             return View(db.Books);
         }
 
+        public ActionResult Book(int id)
+        {
+            return View(db.Books.Find(id));
+        }
+
         [HttpGet]
         public ActionResult Buy(int id)
         {
