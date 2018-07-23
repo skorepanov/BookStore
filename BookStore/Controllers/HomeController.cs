@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 using BookStore.Models;
 using BookStore.Utils;
@@ -16,9 +14,6 @@ namespace BookStore.Controllers
 
         public ActionResult Index()
         {
-            //IEnumerable<Book> books = db.Books;
-            //ViewBag.Books = books;
-            ViewBag.BooksSelectList = new SelectList(db.Books, "Author", "Name");
             return View(db.Books);
         }
 
@@ -43,31 +38,10 @@ namespace BookStore.Controllers
             return $"Спасибо, {purchase.Person}, за покупку!";
         }
 
-        [HttpPost]
-        public string Country(string[] countries)
+        protected override void Dispose(bool disposing)
         {
-            string result = "";
-            foreach (string c in countries)
-            {
-                result += c;
-                result += ";";
-            }
-            return "Вы выбрали: " + result;
-        }
-
-        [HttpPost]
-        public ActionResult MyAction(string product, string action)
-        {
-            if (action == "add")
-            {
-
-            }
-            else if (action == "delete")
-            {
-
-            }
-
-            return null;
+            db.Dispose();
+            base.Dispose(disposing);
         }
 
         #region async
