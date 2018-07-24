@@ -22,6 +22,24 @@ namespace BookStore.Controllers
             return View(db.Books.Find(id));
         }
 
+
+        [HttpGet]
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Create(Book book)
+        {
+            //db.Books.Add(book); // или так
+            db.Entry(book).State = EntityState.Added;
+            db.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
+
         [HttpGet]
         public ActionResult EditBook(int? id)
         {
@@ -48,14 +66,46 @@ namespace BookStore.Controllers
             return RedirectToAction("Index");
         }
 
+
+        [HttpGet]
+        public ActionResult Delete(int id)
+        {
+            Book b = db.Books.Find(id);
+
+            if (b == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(b);
+
+            // или так
+            //Book b = new Book { Id = id };
+            //db.Entry(b).State = EntityState.Deleted;
+            //db.SaveChanges();
+
+            //return RedirectToAction("Index");
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            Book b = db.Books.Find(id);
+
+            if (b == null)
+            {
+                return HttpNotFound();
+            }
+
+            db.Books.Remove(b);
+            db.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
         [HttpGet]
         public ActionResult Buy(int id)
         {
-            if (id > 3)
-            {
-                return Redirect("/Home/Index");
-            }
-            
             ViewBag.BookId = id;
             return View();
         }
